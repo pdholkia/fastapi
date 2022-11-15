@@ -1,0 +1,102 @@
+<Html>
+
+<head>
+    <title>
+        Registration Page
+    </title>
+</head>
+
+<body style="background-color:rgb(125, 219, 156);">
+    <br><br>
+
+    <form name="myForm" action="/update_data" onsubmit="return validate()" method="post" enctype="multipart/form-data" ,
+        style="margin: auto; width: 220px;">
+
+        <input type="hidden" name="id" value="{{ result.id }}">
+
+        <label> Firstname </label>
+        <input type="text" name="firstname" value="{{ result.fname }}" size="30" /> <br> <br>
+
+        <label> Lastname: </label>
+        <input type="text" name="lastname" value="{{ result.lname }}" size="30" /> <br> <br>
+
+        <label> Phone : </label>
+        <input type="tel" name="phone" value="{{ result.phone }}" maxlength="10" size="10" pattern="[0-9]+" />
+        <small>Format: 1234567890</small>
+        <br><br>
+
+        <label> Course : </label>
+        <select name="course" id="course">
+            <option value="">Course</option>
+            <option value="BCA" {% if result.course=="BCA" %} selected {% endif %}>BCA</option>
+            <option value="M.Tech" {% if result.course=="M.Tech" %} selected {% endif %}>M.Tech</option>
+            <option value="BBA" {% if result.course=="BBA" %} selected {% endif %}>BBA</option>
+            <option value="MBA" {% if result.course=="MBA" %} selected {% endif %}>MBA</option>
+            <option value="MCA" {% if result.course=="MCA" %} selected {% endif %}>MCA</option>
+        </select>
+        <br><br>
+        
+        <label> Gender : </label><br>
+        <input type="radio" id="male" name="gender" value="male" {% if result.gender=="male" %} checked="checked" {% endif %} /> Male <br>
+        <input type="radio" id="female" name="gender" value="female" {% if result.gender=="female" %} checked="checked" {% endif %} /> Female <br><br>
+
+        <label> Country : </label>
+        <select class="form-select" name="country" id="country">
+            <option value="">Select Country</option>
+
+            {% for nation in country %}
+            {% if (nation.id | string) == result.country %}
+            <option value="{{nation.id}}" selected>{{nation.name}}</option>
+            {% else %}
+            <option value="{{nation.id}}">{{nation.name}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label> State : </label>
+        <input type="hidden" name="stateId" value="{{result.state}}">
+        <select class="form-select" name="state" id="state">
+            <option value="">Select State</option>
+            <option value=""></option>
+        </select> 
+        <br><br>
+
+        <label> City : </label>
+        <input type="hidden" name="cityid" value="{{result.city}}">
+        <select class="form-select" name="city" id="city">
+            <option value="">Select City</option>
+            <option value=""></option>
+        </select> 
+        <br><br>
+
+        <label> Address </label>
+        <br> <textarea name="address">{{ result.address }}</textarea>
+        <br><br>
+
+        <label> Which vehicle you own: </label>
+        <br>
+        <input type="checkbox" name="vehicle[]" value="Bike" {% if 'Bike' in result.vehicle %} checked {% endif %}>
+        <label for="vehicle1"> I have a bike</label><br>
+        <input type="checkbox" name="vehicle[]" value="Car" {% if 'Car' in result.vehicle %} checked {% endif %}>
+        <label for="vehicle2"> I have a car</label><br>
+        <input type="checkbox" name="vehicle[]" value="Boat" {% if 'Boat' in result.vehicle %} checked {% endif %}>
+        <label for="vehicle3"> I have a boat</label>
+        <br><br>
+
+        <label> Upload your photo: </label>
+        {% if result.image != '' %}
+        <td> <img src="{{ result.image }}" alt="{{ result.image_name }}" width="100px" height="100px"> </td>
+        {% endif %}
+        <input type="file" name="image">
+
+        <br><br>
+        <input type="submit" value="Submit">
+        <a href="/"><input type="button" onclick="" value="Cancel"></a>
+
+    </form>
+</body>
+</html>
+
+<script src="/static/jquery-3.6.1.min.js"></script>
+<script src="/static/common.js"></script>

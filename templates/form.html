@@ -1,0 +1,88 @@
+<Html>
+
+<head>
+    <title>
+        Registration Page
+    </title>
+</head>
+
+<body bgcolor="#f7cac9">
+    <br><br>
+    
+    <form name="myForm" action="/createstudent" onsubmit="return validate()" method="post" enctype="multipart/form-data"
+        style="margin: auto; width: 220px;">
+
+        <label> Firstname </label>
+        <input type="text" name="firstname" size="30" /> <br> <br>
+
+        <label> Lastname: </label>
+        <input type="text" name="lastname" size="30" /> <br> <br>
+
+        <label> Phone : </label>
+        <input type="tel" name="phone" maxlength="10" size="10" pattern="[0-9]+" />
+        <small>Format: 1234567890</small>
+        <br><br>
+
+        <label> Course : </label>
+        <select name="course" id="course">
+            <option value="">Course</option>
+            <option value="BCA">BCA</option>
+            <option value="M.Tech">M.Tech</option>
+            <option value="BBA">BBA</option>
+            <option value="MBA">MBA</option>
+            <option value="MCA">MCA</option>
+        </select>
+        <br><br>
+
+        <label> Gender : </label>
+        <br>
+        <input type="radio" id="male" name="gender" value="male" /> Male <br>
+        <input type="radio" id="female" name="gender" value="female" /> Female <br><br>
+
+        <label> Country : </label>
+        <select class="form-select" name="country" id="countryId">
+            <option value="">Select Country</option>
+            {% for nation in country %}
+            <option value="{{nation.id}}">{{nation.name}}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label> State : </label>
+        <select class="form-select" name="state" id="stateId">
+            <option value="">Select State</option>
+            <option value=""></option>
+        </select>
+        <br><br>
+
+        <label> City : </label>
+        <select class="form-select" name="city" id="cityId">
+            <option value="">Select City</option>
+            <option value=""></option>
+        </select>
+        <br><br>
+
+        <label> Address </label>
+        <br> <textarea name="address" value="address"></textarea> <br><br>
+
+        <label>Which vehicle you own:</label> <br>
+        <input type="checkbox" name="vehicle[]" value="Bike">
+        <label for="vehicle1"> I have a bike</label><br>
+        <input type="checkbox" name="vehicle[]" value="Car">
+        <label for="vehicle2"> I have a car</label><br>
+        <input type="checkbox" name="vehicle[]" value="Boat">
+        <label for="vehicle3"> I have a boat</label>
+        <br><br>
+
+        <label>Upload your photo:</label>
+        <input type="file" name="image">
+        <br><br>
+
+        <button type="submit">Submit</button>
+        <a href="/"><input type="button" onclick="" value="Cancel"></a>
+    </form>
+</body>
+</html>
+
+<script src="static/jquery-3.6.1.min.js"></script>
+<script src="static/common.js"></script>
